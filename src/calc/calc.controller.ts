@@ -4,13 +4,11 @@ import { CalcDto } from './calc.dto';
 
 @Controller('calc')
 export class CalcController {
-  constructor(private readonly calcService: CalcService) {}
+  constructor(private readonly calcService: CalcService) { }
 
   @Post('/')
-  calc(@Body() calcBody: CalcDto) {
-    const result = this.calcService.calculateExpression(calcBody);
-    return {
-      result,
-    };
+  calculate(@Body() body: { expression: string }): { result: string } {
+    const result: any = this.calcService.calculateExpression(body.expression);
+    return { result };
   }
 }
